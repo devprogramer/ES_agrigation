@@ -12,7 +12,7 @@
         "grades_stats" : { "stats" : { "field" : "user_id" } }
     }
 }
-
+Агрегація з фільтрацією
 {
     "aggs" : {
         "users" : {
