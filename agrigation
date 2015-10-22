@@ -24,6 +24,56 @@
     }
 }
 
+Агрегація зі складними структурами
+
+{
+    "query" : {
+        "match" : { "name" : "led tv" }
+    },
+    "aggs" : {
+        "resellers" : {
+            "nested" : {
+                "path" : "resellers"
+            },
+            "aggs" : {
+                "min_price" : { "min" : { "field" : "resellers.price" } }
+            }
+        }
+    }
+}
+
+Групування
+{
+    "aggs" : {
+        "genders" : {
+            "terms" : { "field" : "user_id", 
+            "size":5,
+            "order" : { "_term" : "desc" }
+            }
+            
+        }
+    },
+    "size":0
+}
+
+Рейндж
+
+{
+    "aggs" : {
+        "price_ranges" : {
+            "range" : {
+                "field" : "user_id",
+                "ranges" : [
+                    { "to" : 1000 },
+                    { "from" : 1000, "to" : 100000 },
+                    { "from" : 100000 }
+                ]
+            }
+        }
+    },
+    "size": 0
+}
+
 
 Приклад date_histogram
 
