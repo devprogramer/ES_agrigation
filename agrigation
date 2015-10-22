@@ -1,1 +1,69 @@
 
+Мінімальне значення, Максимальне значення, Сума, середнє: min, max, sum, avg, value_count - кількість документів
+{
+    "aggs" : {
+        "min_user_id" : { "min" : { "field" : "user_id" } }
+    }
+}
+
+Статистичні значення, все попереднє в одному запиті, stats. І розширена статистика extended_stats.
+{
+    "aggs" : {
+        "grades_stats" : { "stats" : { "field" : "user_id" } }
+    }
+}
+
+{
+    "aggs" : {
+        "users" : {
+            "filter" : { "term": { "page": "partners_api" } },
+            "aggs" : {
+                "avg_price" : { "max" : { "field" : "user_id" } }
+            }
+        }
+    }
+}
+
+
+Приклад date_histogram
+
+{
+   
+    query: {
+        
+        filtered: {
+              filter: {
+                and: [
+                    {term: {"autosalon_id":"1363"}},
+                {
+                    "range" : {
+                        "date" : {
+                            "gte": "2015-09-01T00:00:00",
+                            "lte": "2015-09-07T00:00:00"
+                        }
+                    }
+                }
+                ]
+                
+                
+            }
+          
+        }
+    },
+   "aggs" : {
+        "click" : {
+            "date_histogram" : {
+                "field" : "date",
+                "interval" : "hour",
+                "format" : "yyyy-MM-dd"
+            }
+        }
+    }, 
+  
+
+from: 0,
+size: 1
+}
+
+
+
