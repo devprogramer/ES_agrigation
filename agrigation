@@ -115,5 +115,81 @@ from: 0,
 size: 1
 }
 
+Агрегація гістограм і фільтрація
+
+{    
+
+  
+   "aggs" : {
+       "internal" : {
+           filter: {
+               and: [
+                   {term: {"autosalon_id":"198"}},
+                   {term: {"internal":"1"}},
+               {
+                   "range" : {
+                       "date" : {
+                           "gte": "2015-09-01T00:00:00",
+                           "lte": "2015-09-07T00:00:00"
+                       }
+                   }
+               }
+               ]
+               
+               
+           },
+           
+           
+           "aggs" : {
+       "click" : {
+           "date_histogram" : {
+               "field" : "date",
+               "interval" : "day",
+               "format" : "yyyy-MM-dd"
+           }
+       }
+   }
+           
+           
+           
+       },
+       "external" : {
+           filter: {
+               and: [
+                   {term: {"autosalon_id":"198"}},
+                   {term: {"internal":"0"}},
+               {
+                   "range" : {
+                       "date" : {
+                           "gte": "2015-09-01T00:00:00",
+                           "lte": "2015-09-07T00:00:00"
+                       }
+                   }
+               }
+               ]
+               
+               
+           },
+           
+           
+           "aggs" : {
+       "extclick" : {
+           "date_histogram" : {
+               "field" : "date",
+               "interval" : "hour",
+               "format" : "yyyy-MM-dd"
+           }
+       }
+   }
+           
+           
+           
+       }
+   },
+   
+   size: 1
+
+}
+
 
 
