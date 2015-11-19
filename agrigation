@@ -5,12 +5,55 @@
         "min_user_id" : { "min" : { "field" : "user_id" } }
     }
 }
+{
+   "took": 369,
+   "timed_out": false,
+   "_shards": {
+      "total": 5,
+      "successful": 5,
+      "failed": 0
+   },
+   "hits": {
+      "total": 9267810,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "min_user_id": {
+         "value": 0
+      }
+   }
+}
 
 Статистичні значення, все попереднє в одному запиті, stats. І розширена статистика extended_stats.
 {
     "aggs" : {
         "grades_stats" : { "stats" : { "field" : "user_id" } }
     }
+}
+
+{
+   "took": 780,
+   "timed_out": false,
+   "_shards": {
+      "total": 5,
+      "successful": 5,
+      "failed": 0
+   },
+   "hits": {
+      "total": 9267855,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "grades_stats": {
+         "count": 1102973,
+         "min": 0,
+         "max": 5037620,
+         "avg": 2087872.8198895168,
+         "sum": 2302867347772
+      }
+   }
 }
 Агрегація з фільтрацією
 {
@@ -22,6 +65,28 @@
             }
         }
     }
+}
+{
+   "took": 244,
+   "timed_out": false,
+   "_shards": {
+      "total": 5,
+      "successful": 5,
+      "failed": 0
+   },
+   "hits": {
+      "total": 9267885,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "users": {
+         "doc_count": 219381,
+         "avg_price": {
+            "value": 5030587
+         }
+      }
+   }
 }
 
 Агрегація зі складними структурами
@@ -56,6 +121,49 @@
     "size":0
 }
 
+{
+   "took": 6139,
+   "timed_out": false,
+   "_shards": {
+      "total": 5,
+      "successful": 5,
+      "failed": 0
+   },
+   "hits": {
+      "total": 9267922,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "genders": {
+         "doc_count_error_upper_bound": 0,
+         "sum_other_doc_count": 1102970,
+         "buckets": [
+            {
+               "key": 5037620,
+               "doc_count": 3
+            },
+            {
+               "key": 5037605,
+               "doc_count": 1
+            },
+            {
+               "key": 5037533,
+               "doc_count": 1
+            },
+            {
+               "key": 5037471,
+               "doc_count": 2
+            },
+            {
+               "key": 5037451,
+               "doc_count": 1
+            }
+         ]
+      }
+   }
+}
+
 Рейндж
 
 {
@@ -72,6 +180,46 @@
         }
     },
     "size": 0
+}
+{
+   "took": 463,
+   "timed_out": false,
+   "_shards": {
+      "total": 5,
+      "successful": 5,
+      "failed": 0
+   },
+   "hits": {
+      "total": 9267942,
+      "max_score": 0,
+      "hits": []
+   },
+   "aggregations": {
+      "price_ranges": {
+         "buckets": [
+            {
+               "key": "*-1000.0",
+               "to": 1000,
+               "to_as_string": "1000.0",
+               "doc_count": 216050
+            },
+            {
+               "key": "1000.0-100000.0",
+               "from": 1000,
+               "from_as_string": "1000.0",
+               "to": 100000,
+               "to_as_string": "100000.0",
+               "doc_count": 6030
+            },
+            {
+               "key": "100000.0-*",
+               "from": 100000,
+               "from_as_string": "100000.0",
+               "doc_count": 880899
+            }
+         ]
+      }
+   }
 }
 
 
@@ -114,6 +262,35 @@
 from: 0,
 size: 1
 }
+
+"aggregations": {
+      "click": {
+         "buckets": [
+            {
+               "key_as_string": "2015-09-01",
+               "key": 1441065600000,
+               "doc_count": 369
+            },
+            {
+               "key_as_string": "2015-09-02",
+               "key": 1441152000000,
+               "doc_count": 429
+            },
+            {
+               "key_as_string": "2015-09-03",
+               "key": 1441238400000,
+               "doc_count": 417
+            },
+            {
+               "key_as_string": "2015-09-04",
+               "key": 1441324800000,
+               "doc_count": 400
+            },
+            {
+               "key_as_string": "2015-09-05",
+               "key": 1441411200000,
+               "doc_count": 515
+            },
 
 Агрегація гістограм і фільтрація
 
